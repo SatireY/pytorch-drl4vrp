@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 #device = torch.device('cpu')
 
 
@@ -192,7 +192,7 @@ class DRL4TSP(nn.Module):
         dynamic_hidden = self.dynamic_encoder(dynamic)
 
         for _ in range(max_steps):
-
+            # if mask is all zeros, we can stop
             if not mask.byte().any():
                 break
 

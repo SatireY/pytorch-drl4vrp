@@ -64,7 +64,7 @@ def reward(static, tour_indices):
     idx = tour_indices.unsqueeze(1).expand_as(static)
     tour = torch.gather(static.data, 2, idx).permute(0, 2, 1)
 
-    # Make a full tour by returning to the start
+    # Make a full tour by returning to the start tour[:,:1] express the start
     y = torch.cat((tour, tour[:, :1]), dim=1)
 
     # Euclidean distance between each consecutive point

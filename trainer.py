@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader
 
 from model import DRL4TSP, Encoder
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 #device = torch.device('cpu')
 
 
@@ -104,7 +104,7 @@ def validate(data_loader, actor, reward_fn, render_fn=None, save_dir='.',
         static = static.to(device)
         dynamic = dynamic.to(device)
         x0 = x0.to(device) if len(x0) > 0 else None
-
+ 
         with torch.no_grad():
             tour_indices, _ = actor.forward(static, dynamic, x0)
 
